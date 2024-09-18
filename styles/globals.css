@@ -1,0 +1,55 @@
+html, body {
+    margin: 0;
+    padding: 0;
+     min-width: 27rem;  /*oh no.. */
+    background: url('../public/sb2.png') no-repeat center center;
+    background-size: cover;
+   background-attachment: fixed;
+  }
+
+ html {
+  font-size: 16px;
+ }
+
+  hr {
+    position: relative;
+    right: 40%;
+    width: 20%;
+    border-color: darkgray;
+  }
+  
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active {
+     transition: background-color 5000s ease-in-out 0s !important;
+     color: white !important
+  }
+
+ 
+
+input {
+    -webkit-box-shadow: 0 0 0 50px rgb(26, 26, 26) inset !important;
+    box-shadow: 0 0 0 50px rgb(26, 26, 26) inset !important;
+    color: white
+}
+
+
+
+
+/* for the poor peple with like flip phones */
+/* @media (width < 60rem) {
+ html {
+  font-size: 10px;
+ }
+
+ body{
+  font-weight: bolder;
+ }
+} 
+
+@media (width > 105rem) {
+  html {
+    font-size: 19px;
+  }
+} */

@@ -1,0 +1,37 @@
+{
+  "name": "projectapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.7.3",
+    "classnames": "^2.5.1",
+    "next": "^14.2.11",
+    "postcss": "^8.4.47",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-skinview3d": "^5.1.0",
+    "sass": "^1.78.0",
+    "skinview3d": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.5.5",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.5",
+    "source-map-loader": "^5.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2"
+  }
+}
