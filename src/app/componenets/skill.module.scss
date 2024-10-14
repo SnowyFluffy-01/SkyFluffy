@@ -13,18 +13,27 @@
 }
 
 .image {
-  background: grey;
+ position: relative;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+  padding: 0.6rem;
   border-radius: 50%;
+  height: 50px;
+  width: 50px;
  grid-row: 1;
  grid-column: 1;
+ transform: translate(-1.3rem,0.37rem);
+z-index: 100;
+box-shadow: 4px 6px 10px;
 }
 
 .container {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 3.5rem 26.4vw; 
+    grid-template-rows: 2.3rem 1.4rem;
+    grid-template-columns: 3.4rem 26.4vw; 
     align-items: center;
-   min-width: 28vw; 
+   min-width: fit-content; 
 
 }
 

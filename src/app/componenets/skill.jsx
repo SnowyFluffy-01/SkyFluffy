@@ -5,6 +5,7 @@ function Skill({src, name, level, maxLevel, currentXp, nextXp}) {
   // console.log("🚀 ~ Skill ~ src, name, width, maxLevel, currentXp, nextXp:", src, name, level, maxLevel, currentXp, nextXp)
  
   let barWidth;
+  
   if(nextXp) {
     barWidth =  Math.floor((currentXp/nextXp) * 100)
   } else {
@@ -31,23 +32,29 @@ function Skill({src, name, level, maxLevel, currentXp, nextXp}) {
      }  
 
      
-
-   const source = `/${src}.jpeg`
+    function isMax() {
+     if(barWidth > 99) {
+      return true
+     } else {
+      return false
+     }
+    }
+   const source = `/${src}.png`
 
     return (
     
       <div className = {styles.container}>
-        <div>
-<Image width= {38} height = {35}alt = '' className={styles.image} src= {source} />  
+        <div className={styles.image} style = {{ backgroundColor: isMax() ? 'gold' : 'green' }}>
+<Image  width= {50} height = {50}alt = ''  src= {source} />  
         </div>
 <div className={styles.name}> {namer + ' ' + level} </div>
 
 <div className = {styles.barContainer}>
 
-    <div className = {styles.bar} style= {{width: `${barWidth}%`, backgroundColor: barWidth > 99  ? 'gold' : 'green'}}> 
+    <div className = {styles.bar} style= {{width: `${barWidth}%`, backgroundColor: isMax() ? 'gold' : 'green'}}> 
    
     </div>
-    <div style = {{marginLeft: '11%'}} className = {styles.xp}> {xp} </div>
+    <div style = {{marginLeft: '16%'}} className = {styles.xp}> {xp} </div>
   
      
 </div>   

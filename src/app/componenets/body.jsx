@@ -1,5 +1,6 @@
 'use client';
-import React, { useEffect, useState, useCallback } from 'react';
+ /* eslint-disable react-hooks/exhaustive-deps */  
+import React, { useEffect, useState, useRef} from 'react';
 import styles from './body.module.scss';
 import axios from 'axios';
 import Skill from './skill';
@@ -7,12 +8,13 @@ import classNames from 'classnames';
 import Stat from './stat';
 import ReactSkinview3d from "react-skinview3d";
 import SearchIcon from '@mui/icons-material/Search';
-import { SettingsRemoteOutlined } from '@mui/icons-material';
 import calculateWisdom from './calculator.js'
+import * as skinview3d from "skinview3d";
+
 const apiKey = process.env.API_KEY;
 
+
 function Body() {
-  
   const [done, setDone] = useState(false);
   const [data, setData] = useState(null);
   const [current, setCurrent] = useState(false);
@@ -22,7 +24,10 @@ function Body() {
   const [loading, setLoading] = useState(false);  
   const [url, setUrl] = useState('') ;
   const [match, setMatch] = useState(false);
-  const [fontSize,  setFontSize] = useState()
+  
+
+
+  
  const sbSkills = ['Combat', 'Fishing', 'Runecrafting', 'Social', 'Taiming', 'Foraging', 'Carpentry', 'Enchanting']
  const stats = {
   health: {
@@ -136,6 +141,8 @@ function Body() {
 }
 
 
+
+// Places the enter field in the header section
 useEffect(() => {
   if (done) {
     const inputDiv = document.querySelector(`.${styles.celler}`);
@@ -147,24 +154,6 @@ useEffect(() => {
 }, [done]);
 
 
-
-
-if(typeof window !== "undefined"  && done ) {
-  const x = window.matchMedia("(min-width: 130rem)");
-  x.addEventListener("change", ()=> {
-    const display = document.querySelector(`.${styles.display}`)
-    const skin = document.querySelector(`.${styles.wrapper}`)
-    const html = document.getElementsByTagName("html")[0]
-    if(x.matches) {
-    setMatch(true);
-  
-  }
-   else {
-    setMatch(false);
-   }
-  }
-)
-}
    async function fetchData (profileName) {
     setLoading(true);
     try {
@@ -196,15 +185,69 @@ if(typeof window !== "undefined"  && done ) {
     }
   };
  
+  // Calculate wisdom stats on fetch
   useEffect( ()=> {
     if(data && key) {
       calculateWisdom(data,key)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [data])
 
+
+  useEffect( () => {
+    if (typeof window !== "undefined" && done) {
   
-  // Handlers
+      // Initalize 3d viewer
+      const canvas = document.getElementById("canvas");
+      let viewer;
+  
+      if (canvas) {
+        viewer = new skinview3d.SkinViewer({
+          canvas: canvas,
+          width: window.innerWidth * 0.3,
+          height: window.innerHeight * 0.62,
+          skin: url
+        })
+  
+        const handleResize = () => {
+          viewer.width = x.matches ? window.innerWidth * 0.2 :  window.innerWidth * 0.3,
+          viewer.height = x.matches ? window.innerHeight * 0.22 :window.innerHeight * 0.62;
+        };
+        let wrapper = document.querySelector(`.${styles.wrapper}`)
+        var x = window.matchMedia("(max-width: 114.75rem)");
+        const appendCanvas = () => {
+          if (x.matches) { 
+             let parent = document.querySelector(`.${styles.parent}`);
+              parent.insertBefore(wrapper, document.querySelector('#stat'))
+              setMatch(true)
+             
+              wrapper.style.position = 'static'
+              document.querySelector(`.${styles.flex}`).style.display = 'contents';
+          } else {
+            
+            let parent = document.querySelector(`.${styles.flex}`);
+              parent.insertBefore(wrapper, document.querySelector(`.${styles.display}`))
+              wrapper.style.position = 'sticky'
+              parent.style.display = 'flex'
+  
+
+            setMatch(false)
+          }
+        };
+        appendCanvas()
+        x.addEventListener('change', appendCanvas)
+        window.addEventListener("resize", handleResize);
+      }
+    }
+
+  }, [done]);
+
+
+   
+ 
+ 
+  
+  // Event handling (submit, click..)
   function handleEvent(e) {
     if(e.key == 'Enter') {
       if(input.trim()) {
@@ -223,7 +266,6 @@ if(typeof window !== "undefined"  && done ) {
   }
    
   
-
   return (
     <div style = {{marginBottom: '3rem'}}>
       <div className={styles.flexContainer}>
@@ -249,17 +291,14 @@ if(typeof window !== "undefined"  && done ) {
         <div className = {styles.search}>
           <SearchIcon sx = {{'&:hover': {
             color: 'gray',
-          }}}onClick={handleSubmit} /> 
+          }}}
+          onClick={handleSubmit} /> 
         </div>
       </div>
 
-      <div className={done ? styles.flex : null}>
-      <div className = {styles.wrapper}>
-     {done ? match ? <ReactSkinview3d
-     skinUrl = {url}
-     width = "100%"
-     height= "100%"
-     /> : null : null}
+      <div className={done ?  styles.flex :  null}>
+      <div className = {done ? styles.wrapper : null}>
+     {done ? <canvas  id ='canvas'></canvas> : null}
       </div>
       <div className={classNames({
         [styles.display]: done,
@@ -272,15 +311,14 @@ if(typeof window !== "undefined"  && done ) {
             <div className={styles.title}>STATS <hr/></div>
              <div className = {styles.stats}>
             {Object.keys(data.profiles[key].data.stats).map((statKey, index) => {
-              const stat =data.profiles[key].data.stats[statKey]
               
-                // <Stat name= {stat} icon = {stats[key].icon} value = {stat.value}/>
+               return  <Stat key = {index} name= {statKey} stats = {stats[statKey]} vale = {data.profiles[key].data.stats[statKey]} />
               
             })
             }
 
              </div>
-            <div className={styles.title}>SKILLS <hr/> </div>
+            <div id = 'stat' className={styles.title}>SKILLS <hr/> </div>
             
 
             <div  className = {styles.skill}>

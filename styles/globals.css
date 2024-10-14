@@ -5,6 +5,7 @@ html, body {
     background: url('../public/sb2.png') no-repeat center center;
     background-size: cover;
    background-attachment: fixed;
+   
   }
 
  html {
@@ -18,22 +19,28 @@ html, body {
     border-color: darkgray;
   }
   
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active {
-     transition: background-color 5000s ease-in-out 0s !important;
-     color: white !important
-  }
-
  
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s !important;
+      color: white !important;
+      -webkit-box-shadow: 0 0 0px 1000px rgb(26, 26, 26) inset !important;
+      box-shadow: 0 0 0px 1000px rgb(26, 26, 26) inset !important;
+      -webkit-text-fill-color: white !important;
+      caret-color: white !important;
+      font-family: inherit !important; 
+      font-size: inherit !important;  
+      line-height: inherit !important; 
+      padding:0
+  }  
 
-input {
-    -webkit-box-shadow: 0 0 0 50px rgb(26, 26, 26) inset !important;
-    box-shadow: 0 0 0 50px rgb(26, 26, 26) inset !important;
-    color: white
+  input:-internal-autofill-selected {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
 }
-
 
 
 

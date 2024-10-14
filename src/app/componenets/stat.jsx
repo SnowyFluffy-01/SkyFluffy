@@ -1,15 +1,15 @@
 import styles from './stat.module.scss'
 
-function Stat({name, icon, value}) {
-console.log("🚀 ~ Stat ~ {name, icon, value:", name, icon, value)
+function Stat(props) {
+console.log("🚀 ~ Stat ~ {name, icon, value:", props,props.stats.icon)
 
 
 
     return (
         <div>
-         <div className ={styles.icon}> {icon}</div>
-         <div className = {styles.name}>{name}</div>
-         <div className = {styles.value}>{value}</div>
+         <div style = {{color: (JSON.stringify(props.stats.color))}}className ={styles.icon}> {props.stats.icon}</div>
+         <div className = {styles.name}>{props.name}</div>
+         <div className = {styles.value}>{props.value}</div>
         </div> 
     )
 }
