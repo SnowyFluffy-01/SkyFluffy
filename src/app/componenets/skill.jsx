@@ -1,5 +1,5 @@
 import react from 'react';
-import styles from './skill.module.scss'
+import styles from '../../../styles/skill.module.scss'
 import Image from 'next/image'
 function Skill({src, name, level, maxLevel, currentXp, nextXp}) {
   // console.log("🚀 ~ Skill ~ src, name, width, maxLevel, currentXp, nextXp:", src, name, level, maxLevel, currentXp, nextXp)
@@ -39,7 +39,7 @@ function Skill({src, name, level, maxLevel, currentXp, nextXp}) {
       return false
      }
     }
-   const source = `/${src}.png`
+   const source = `/skills/${src}.png`
 
     return (
     

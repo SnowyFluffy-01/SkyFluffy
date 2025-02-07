@@ -1,14 +1,13 @@
 'use client';
  /* eslint-disable react-hooks/exhaustive-deps */  
-import React, { useEffect, useState, useRef} from 'react';
-import styles from './body.module.scss';
+import React, { useEffect, useState} from 'react';
+import styles from '../../../styles/body.module.scss';
 import axios from 'axios';
 import Skill from './skill';
-import classNames from 'classnames';
-import Stat from './stat';
-import ReactSkinview3d from "react-skinview3d";
+import fetch  from '../../../lib/api-req'
+import classNames from 'classnames'
 import SearchIcon from '@mui/icons-material/Search';
-import calculateWisdom from './calculator.js'
+import calculateWisdom from '../../../lib/calculator.js'
 import * as skinview3d from "skinview3d";
 
 const apiKey = process.env.API_KEY;
@@ -155,10 +154,12 @@ useEffect(() => {
 
 
    async function fetchData (profileName) {
-    setLoading(true);
+  
     try {
       const res = await axios.get(`https://sky.shiiyu.moe/api/v2/profile/${profileName}`);
       const data = res.data;
+      // const response = await axios.get(`http://localhost:3000/api/dir?name=${encodeURIComponent(profileName)}`);
+      // const heavyData = response.json()
       setData(data);
       console.log(data);
       Object.keys(data.profiles).forEach(key => {
@@ -240,7 +241,7 @@ useEffect(() => {
       }
     }
 
-  }, [done]);
+  }, [done,url]);
 
 
    
@@ -312,7 +313,7 @@ useEffect(() => {
              <div className = {styles.stats}>
             {Object.keys(data.profiles[key].data.stats).map((statKey, index) => {
               
-               return  <Stat key = {index} name= {statKey} stats = {stats[statKey]} vale = {data.profiles[key].data.stats[statKey]} />
+              //  return  <Stat key = {index} name= {statKey} stats = {stats[statKey]} vale = {data.profiles[key].data.stats[statKey]} />
               
             })
             }
@@ -337,7 +338,49 @@ useEffect(() => {
     
   );
 })}
-</div>   
+</div> 
+<div className = {styles.title}> INVENTORY</div>
+<hr/> 
+<div className = {styles.inv}>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className = {styles.spacer}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}></div>
+   <div className={styles.item}>  </div> 
+     
+   </div>  
 </div>           
  }
  </div>

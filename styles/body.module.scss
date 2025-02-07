@@ -1,0 +1,226 @@
+
+.flexContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.3rem;
+  align-items: center;
+  background-color:rgba(17, 16, 16, 0.7);
+  
+  height: auto;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+  width: 100%;
+  height: clamp(5vh, 4vh, auto);
+  position: sticky;
+  top:0;
+  z-index: 1
+}
+
+.cell * {
+  white-space: nowrap;
+}
+
+.celler {
+  display: flex;
+  margin-top: 2%;
+  max-width: 14rem;
+ max-height: 3rem;
+  margin: auto 0;
+   min-width: 14rem;
+  align-items: center;
+  justify-content: space-between;
+ background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 3.8rem;
+  backdrop-filter: blur(10px);
+  color: white;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: 6rem;
+}
+
+.cell {
+  display: flex;
+  max-width: 27rem;
+  margin: auto;
+  margin-top: 2rem;
+   min-height: 2rem;
+  align-items: center;
+  justify-content: space-between;
+ background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 3.8rem;
+  backdrop-filter: blur(10px);
+  color: white;
+  gap: 1rem;
+  padding: 1rem;
+  }
+
+.submitButton:hover {
+  background-color: rgb(72, 182, 62);
+}
+
+.input {
+  background-color:rgb(36, 35, 35);
+  border: none;
+  border-radius: 1.9rem;
+  font-weight: bolder;
+  height: 3.2rem;
+  max-width: 10rem;
+  max-height: 6rem;
+  text-align: center;
+  outline: none;
+  
+  font-size: 1rem;
+  color:rgb(253, 253, 253);
+}
+
+.display {
+  background-color: rgba(14, 13, 13, 0.7);
+  border: none;
+ border-radius: 3px;
+ padding: 0;
+  backdrop-filter: blur(15px);
+  width: 90%;
+ margin-inline:auto;
+align-self:normal;
+height: fit-content;
+}
+
+.title {
+color:rgb(231, 231, 231);
+font-size: 1.34rem;
+margin: 0.3rem;
+}
+
+.hide {
+  display:none;
+}
+
+.parent {
+  padding: 1%;
+  display:grid;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: clamp(1rem, 2rem, 3rem);
+  grid-template-columns: 1fr ;
+  grid-template-rows: 4rem 5rem 2rem auto;
+  grid-auto-rows: auto;
+}
+
+.skill {
+  display: grid;
+  grid-template-columns: repeat(2, 20vw);
+  grid-template-rows: repeat(5,auto);
+  row-gap:2rem;
+  position: relative;
+  column-gap: 13vw;
+  margin-top: 2.8%;
+  max-width: 100%;
+  max-height: 98%;
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+}
+
+
+.name {
+  background-color: gray;
+ display: inline-flex;;
+  height: 2.4rem;
+  border-radius: 2.5rem;
+  width: max-content;
+  padding: 0.3rem 1.7rem;
+  align-items: center;
+  justify-content: center;
+  color: rgb(226, 223, 223);
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+   justify-content: space-between;
+   justify-content: center;
+   position: relative;
+   height: 200vh;
+}
+
+.wrapper {
+  position: sticky;
+  position:-webkit-sticky ;
+  top:30%;
+ height: min-content;
+ width: min-content;
+ display: inline-block
+}
+
+
+.inv {
+  width: 83%;
+  height: 60vh;
+  margin-top: 3rem;
+  margin-inline: auto;
+  background-color: rgba(44, 36, 36, 0.7);
+  opacity: 0.5;
+  backdrop-filter: blur(0.8rem);
+  display: grid;
+  grid-template-columns: repeat(9, 7rem);
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  
+}
+
+.item {
+  border: 0.33rem solid silver;
+  box-shadow: 20 20 100 black ;
+  background-color: rgb(80, 68, 68);
+}
+
+.spacer {
+  grid-column: span 9 
+}
+
+/* PHONE / TABLET */
+@media (width <  80.5rem) {
+.skill {
+grid-template-columns: auto;
+}
+
+.display {
+  width: 100%
+}
+.cell {
+  width: auto;
+}
+
+.cell * {
+  width: auto;
+  font-size: 1.2rem;
+}
+
+
+.celler {
+  margin-left: 0.4rem
+}
+}
+
+
+
+
+/* *LAPTOPS */
+@media  (width >80.6rem) and (width < 114.76rem) {
+
+  .skill {
+    margin-left: 4vw;
+    column-gap: 18vw;
+  }
+  
+
+
+
+}
+
+/* between tablet and laptop */
+@media (width >62.5rem) and (width < 80.6rem) {
+  
+}
+
+
+
+

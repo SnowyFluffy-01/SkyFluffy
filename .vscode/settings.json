@@ -1,2 +1,13 @@
 {
+    "emmet.syntaxProfiles": {
+    "jsx": {
+        "markup.attributes": {
+            "class*": "className",
+        },
+        "markup.valuePrefix": {
+            "class*": "styles"
+        }
+    }
+
+}
 }

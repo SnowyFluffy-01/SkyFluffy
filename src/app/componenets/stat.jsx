@@ -1,4 +1,4 @@
-import styles from './stat.module.scss'
+import styles from '../../../styles/stat.module.scss'
 
 function Stat(props) {
 console.log("🚀 ~ Stat ~ {name, icon, value:", props,props.stats.icon)
