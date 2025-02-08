@@ -11,7 +11,9 @@ const montserrat = Montserrat({ subsets: ["latin"],
 export const metadata = {
   title: "SkyFluffy",
   description: "A SkyCrypt-Based project that mimics functionality of it. Personal Project of SnowyFluffy",
- 
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export const viewport = {
