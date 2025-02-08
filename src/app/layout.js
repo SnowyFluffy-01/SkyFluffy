@@ -14,7 +14,20 @@ export const metadata = {
   icons: {
     icon: '/favicon.png',
   },
-};
+  openGraph: {
+    title: 'My Skyblock Website',
+    description: "A SkyCrypt-Based project that mimics functionality of it. Personal Project of SnowyFluffy",
+    url: 'https://skyfluffy.vercel.app',
+    siteName: 'SkyFluffy',
+    images: [
+      {
+        url: '/favicon.png',
+        width: 1200,
+        height: 630,
+        alt: 'Skyblock Website Preview',
+      }
+    ]
+}};1
 
 export const viewport = {
   width: 'device-width',
