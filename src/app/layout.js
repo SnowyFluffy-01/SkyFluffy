@@ -15,7 +15,7 @@ export const metadata = {
     icon: '/favicon.png',
   },
   openGraph: {
-    title: 'My Skyblock Website',
+    title: 'SkyFluffy',
     description: "A SkyCrypt-Based project that mimics functionality of it. Personal Project of SnowyFluffy",
     url: 'https://skyfluffy.vercel.app',
     siteName: 'SkyFluffy',
