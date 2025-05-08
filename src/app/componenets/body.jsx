@@ -2,27 +2,86 @@
  /* eslint-disable react-hooks/exhaustive-deps */  
 import React, { useEffect, useState} from 'react';
 import styles from '../../../styles/body.module.scss';
-import axios from 'axios';
 import Skill from './skill';
-import fetch  from '../../../lib/api-req'
+import fetch  from '../../../lib/fetch.js'
 import classNames from 'classnames'
 import SearchIcon from '@mui/icons-material/Search';
 import calculateWisdom from '../../../lib/calculator.js'
 import * as skinview3d from "skinview3d";
-
+import calcXp from '../../../lib/xp.js'
 const apiKey = process.env.API_KEY;
 
 
 function Body() {
   const [done, setDone] = useState(false);
-  const [data, setData] = useState(null);
-  const [current, setCurrent] = useState(false);
-  const [key, setKey] = useState(null);
-  const [input, setInput] = useState("");
-  const [skills, setSkills] = useState({});
-  const [loading, setLoading] = useState(false);  
+  const [input, setInput] = useState(""); 
   const [url, setUrl] = useState('') ;
   const [match, setMatch] = useState(false);
+  const [data, setData] = useState({
+    profile: null,
+    skills: {
+      farming: {
+        xp: null,
+        nextXp: null,
+        level: null,
+      }, 
+      foraging: {
+        xp: null,
+        nextXp: null,
+        level: null,
+      },
+      combat: {
+        xp: null,
+        nextXp: null,
+        level: null,
+      },
+      social: {
+        xp: null,
+        nextXp: null,
+        level: null,
+      },
+      fishing: {
+        xp: null,
+        nextXp: null,
+        level: null,
+      },
+     alchemy: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    mining: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    enhanting: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    taming: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    dungeoneering: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    carpentry: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    runecrafting: {
+      xp: null,
+      nextXp: null,
+      level: null,
+    },
+    }
+  })
   
 
 
@@ -153,48 +212,48 @@ useEffect(() => {
 }, [done]);
 
 
-   async function fetchData (profileName) {
+  //  async function fetchData (profileName) {
   
-    try {
-      const res = await axios.get(`https://sky.shiiyu.moe/api/v2/profile/${profileName}`);
-      const data = res.data;
-      // const response = await axios.get(`http://localhost:3000/api/dir?name=${encodeURIComponent(profileName)}`);
-      // const heavyData = response.json()
-      setData(data);
-      console.log(data);
-      Object.keys(data.profiles).forEach(key => {
-        if (data.profiles[key].current) {
-          setCurrent(true);
-          setKey(key);
-          setSkills(data.profiles[key].data.skills.skills);  
-        }
-      });
-      setUrl(`https://mineskin.eu/skin/${profileName}`)
-      setDone(true);
-    } catch (e) {
-      console.error(e);
-      const field = document.querySelector('#input')
-      setInput('')
-      field.setAttribute('placeholder', 'User not found')
+  //   try {
+  //     const res = await axios.get(`https://sky.shiiyu.moe/api/v2/profile/${profileName}`);
+  //     const data = res.data;
+  //     // const response = await axios.get(`http://localhost:3000/api/dir?name=${encodeURIComponent(profileName)}`);
+  //     // const heavyData = response.json()
+  //     setData(data);
+  //     console.log(data);
+  //     Object.keys(data.profiles).forEach(key => {
+  //       if (data.profiles[key].current) {
+  //         setCurrent(true);
+  //         setKey(key);
+  //         setSkills(data.profiles[key].data.skills.skills);  
+  //       }
+  //     });
+  //     setUrl(`https://mineskin.eu/skin/${profileName}`)
+  //     setDone(true);
+  //   } catch (e) {
+  //     console.error(e);
+  //     const field = document.querySelector('#input')
+  //     setInput('')
+  //     field.setAttribute('placeholder', 'User not found')
       
       
-    setTimeout( () => {
-      field.setAttribute('placeholder', 'Enter your IGN')
-    }, 3000)
-    } finally {
-      setLoading(false); 
-    }
-  };
+  //   setTimeout( () => {
+  //     field.setAttribute('placeholder', 'Enter your IGN')
+  //   }, 3000)
+  //   } finally {
+  //     setLoading(false); 
+  //   }
+  // };
  
-  // Calculate wisdom stats on fetch
-  useEffect( ()=> {
-    if(data && key) {
-      calculateWisdom(data,key)
-    }
+  // // Calculate wisdom stats on fetch
+  // useEffect( ()=> {
+  //   if(data && key) {
+  //     calculateWisdom(data,key)
+  //   }
    
-  }, [data])
+  // }, [data])
 
-
+    
   useEffect( () => {
     if (typeof window !== "undefined" && done) {
   
@@ -252,15 +311,23 @@ useEffect(() => {
   function handleEvent(e) {
     if(e.key == 'Enter') {
       if(input.trim()) {
-        fetchData(input.trim());
+        handleFetch(input.trim())
       }
   }}
 
-  function handleSubmit(e) {
+   async function handleFetch(e) {
+    setDone(false)
+    try {
     if (input.trim()) {
-      fetchData(input.trim());
+     const {profile, name} = await fetch(input.trim());
+     setProfile({profile, name})
+     setDone(true)
     }
-  }
+  
+} catch(e) {
+  console.error(e)
+}}
+
 
   function handleChange(e) {
     setInput(e.target.value);
@@ -293,7 +360,7 @@ useEffect(() => {
           <SearchIcon sx = {{'&:hover': {
             color: 'gray',
           }}}
-          onClick={handleSubmit} /> 
+          onClick={handleFetch} /> 
         </div>
       </div>
 
@@ -308,22 +375,22 @@ useEffect(() => {
         
         {done && 
         <div className= {styles.parent}>
-            <div className={styles.title}>Showing data for <div className = {styles.name}>{data && data.profiles[key].data.display_name}</div> on <div className={styles.name} style = {{width: 'max-content'}}> {data?.profiles[key]?.cute_name}</div> </div>
+            <div className={styles.title}>Showing data for <div className = {styles.name}>{profile.name}</div> on <div className={styles.name} style = {{width: 'max-content'}}> {profile.profile} </div> </div>
             <div className={styles.title}>STATS <hr/></div>
              <div className = {styles.stats}>
-            {Object.keys(data.profiles[key].data.stats).map((statKey, index) => {
+            {/* {Object.keys(data.profiles[key].data.stats).map((statKey, index) => {
               
               //  return  <Stat key = {index} name= {statKey} stats = {stats[statKey]} vale = {data.profiles[key].data.stats[statKey]} />
               
             })
-            }
+            } */}
 
              </div>
             <div id = 'stat' className={styles.title}>SKILLS <hr/> </div>
             
 
             <div  className = {styles.skill}>
-            {Object.keys(skills).map((skillKey, index) => {
+            {/* {Object.keys(skills).map((skillKey, index) => {
   const skill = skills[skillKey];
   return (
     <Skill  
@@ -337,7 +404,7 @@ useEffect(() => {
     />
     
   );
-})}
+})} */}
 </div> 
 <div className = {styles.title}> INVENTORY</div>
 <hr/> 
