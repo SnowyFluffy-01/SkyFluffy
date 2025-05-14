@@ -3,88 +3,20 @@
 import React, { useEffect, useState} from 'react';
 import styles from '../../../styles/body.module.scss';
 import Skill from './skill';
-import fetch  from '../../../lib/fetch.js'
+import fetch  from '../../../lib/fetch.mjs'
 import classNames from 'classnames'
 import SearchIcon from '@mui/icons-material/Search';
 import calculateWisdom from '../../../lib/calculator.js'
 import * as skinview3d from "skinview3d";
-import calcXp from '../../../lib/xp.js'
+import calcXp from '../../../lib/xp.mjs'
 const apiKey = process.env.API_KEY;
 
 
 function Body() {
   const [done, setDone] = useState(false);
   const [input, setInput] = useState(""); 
-  const [url, setUrl] = useState('') ;
   const [match, setMatch] = useState(false);
-  const [data, setData] = useState({
-    profile: null,
-    skills: {
-      farming: {
-        xp: null,
-        nextXp: null,
-        level: null,
-      }, 
-      foraging: {
-        xp: null,
-        nextXp: null,
-        level: null,
-      },
-      combat: {
-        xp: null,
-        nextXp: null,
-        level: null,
-      },
-      social: {
-        xp: null,
-        nextXp: null,
-        level: null,
-      },
-      fishing: {
-        xp: null,
-        nextXp: null,
-        level: null,
-      },
-     alchemy: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    mining: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    enhanting: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    taming: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    dungeoneering: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    carpentry: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    runecrafting: {
-      xp: null,
-      nextXp: null,
-      level: null,
-    },
-    }
-  })
-  
-
-
+ const [data, setData] = useState({})
   
  const sbSkills = ['Combat', 'Fishing', 'Runecrafting', 'Social', 'Taiming', 'Foraging', 'Carpentry', 'Enchanting']
  const stats = {
@@ -199,15 +131,16 @@ function Body() {
 }
 
 
-
+let first = 0
 // Places the enter field in the header section
 useEffect(() => {
-  if (done) {
+  if (done && first == 0) {
     const inputDiv = document.querySelector(`.${styles.celler}`);
     const headerDiv = document.querySelector(`.${styles.flexContainer}`);
     headerDiv.appendChild(inputDiv);
     const text = document.querySelector('#name');
     text.remove()
+    first++
   }
 }, [done]);
 
@@ -262,6 +195,7 @@ useEffect(() => {
       let viewer;
   
       if (canvas) {
+        let url = data.account.skin;
         viewer = new skinview3d.SkinViewer({
           canvas: canvas,
           width: window.innerWidth * 0.3,
@@ -289,9 +223,7 @@ useEffect(() => {
               parent.insertBefore(wrapper, document.querySelector(`.${styles.display}`))
               wrapper.style.position = 'sticky'
               parent.style.display = 'flex'
-  
-
-            setMatch(false)
+              setMatch(false)
           }
         };
         appendCanvas()
@@ -300,7 +232,7 @@ useEffect(() => {
       }
     }
 
-  }, [done,url]);
+  }, [done]);
 
 
    
@@ -311,16 +243,16 @@ useEffect(() => {
   function handleEvent(e) {
     if(e.key == 'Enter') {
       if(input.trim()) {
-        handleFetch(input.trim())
+        handleFetch()
       }
   }}
 
-   async function handleFetch(e) {
+   async function handleFetch() {
     setDone(false)
     try {
     if (input.trim()) {
-     const {profile, name} = await fetch(input.trim());
-     setProfile({profile, name})
+     const data = await fetch(input.trim());
+     setData(data)
      setDone(true)
     }
   
@@ -375,7 +307,7 @@ useEffect(() => {
         
         {done && 
         <div className= {styles.parent}>
-            <div className={styles.title}>Showing data for <div className = {styles.name}>{profile.name}</div> on <div className={styles.name} style = {{width: 'max-content'}}> {profile.profile} </div> </div>
+            <div className={styles.title}>Showing data for <div className = {styles.name}>{data.name}</div> on <div className={styles.name} style = {{width: 'max-content'}}> {data.profile} </div> </div>
             <div className={styles.title}>STATS <hr/></div>
              <div className = {styles.stats}>
             {/* {Object.keys(data.profiles[key].data.stats).map((statKey, index) => {
@@ -390,21 +322,19 @@ useEffect(() => {
             
 
             <div  className = {styles.skill}>
-            {/* {Object.keys(skills).map((skillKey, index) => {
-  const skill = skills[skillKey];
+             {Object.keys(data.skills).map((skill, index) => {
   return (
     <Skill  
       key={index}
-      name={skillKey}
-      src = {skillKey}
-      level={skill.level}
-      maxLevel={skill.maxLevel}
-      currentXp={skill.xpCurrent}
-      nextXp={skill.xpForNext}
+      name={skill}
+      level={data.skills[skill].level}
+      xp={data.skills[skill].xp}
+      nextXp={data.skills[skill].nextXp}
+      overflow = {data.skills[skill].overflow}
     />
     
   );
-})} */}
+})} 
 </div> 
 <div className = {styles.title}> INVENTORY</div>
 <hr/> 

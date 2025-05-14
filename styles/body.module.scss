@@ -161,8 +161,8 @@ margin: 0.3rem;
   opacity: 0.5;
   backdrop-filter: blur(0.8rem);
   display: grid;
-  grid-template-columns: repeat(9, 7rem);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(9, min(9%, 1%));
+  grid-template-rows: repeat(5, 21%);
   
 }
 
