@@ -31,7 +31,7 @@
     "**/*.ts",
     "**/*.tsx",
     "./src/**/*"
-, "styles/api-req.js", "lib", "styles/layout.js"  ],
+, "styles/api-req.js", "src/lib", "styles/layout.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -33,8 +33,12 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-skinview3d": "^5.1.0",
+    "redis": "^5.1.0",
     "sass": "^1.87.0",
-    "skinview3d": "^3.2.0"
+    "sharp": "^0.34.2",
+    "sharp-apng": "^0.1.5",
+    "skinview3d": "^3.2.0",
+    "upng-js": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "22.15.3",

@@ -3,13 +3,11 @@
 import React, { useEffect, useState} from 'react';
 import styles from '../../../styles/body.module.scss';
 import Skill from './skill';
-import fetch  from '../../../lib/fetch.mjs'
+import Image from 'next/image'
+import fetch  from '../../lib/fetch.mjs'
 import classNames from 'classnames'
 import SearchIcon from '@mui/icons-material/Search';
-import calculateWisdom from '../../../lib/calculator.js'
 import * as skinview3d from "skinview3d";
-import calcXp from '../../../lib/xp.mjs'
-const apiKey = process.env.API_KEY;
 
 
 function Body() {
@@ -131,65 +129,8 @@ function Body() {
 }
 
 
-let first = 0
-// Places the enter field in the header section
-useEffect(() => {
-  if (done && first == 0) {
-    const inputDiv = document.querySelector(`.${styles.celler}`);
-    const headerDiv = document.querySelector(`.${styles.flexContainer}`);
-    headerDiv.appendChild(inputDiv);
-    const text = document.querySelector('#name');
-    text.remove()
-    first++
-  }
-}, [done]);
-
-
-  //  async function fetchData (profileName) {
-  
-  //   try {
-  //     const res = await axios.get(`https://sky.shiiyu.moe/api/v2/profile/${profileName}`);
-  //     const data = res.data;
-  //     // const response = await axios.get(`http://localhost:3000/api/dir?name=${encodeURIComponent(profileName)}`);
-  //     // const heavyData = response.json()
-  //     setData(data);
-  //     console.log(data);
-  //     Object.keys(data.profiles).forEach(key => {
-  //       if (data.profiles[key].current) {
-  //         setCurrent(true);
-  //         setKey(key);
-  //         setSkills(data.profiles[key].data.skills.skills);  
-  //       }
-  //     });
-  //     setUrl(`https://mineskin.eu/skin/${profileName}`)
-  //     setDone(true);
-  //   } catch (e) {
-  //     console.error(e);
-  //     const field = document.querySelector('#input')
-  //     setInput('')
-  //     field.setAttribute('placeholder', 'User not found')
-      
-      
-  //   setTimeout( () => {
-  //     field.setAttribute('placeholder', 'Enter your IGN')
-  //   }, 3000)
-  //   } finally {
-  //     setLoading(false); 
-  //   }
-  // };
- 
-  // // Calculate wisdom stats on fetch
-  // useEffect( ()=> {
-  //   if(data && key) {
-  //     calculateWisdom(data,key)
-  //   }
-   
-  // }, [data])
-
-    
   useEffect( () => {
     if (typeof window !== "undefined" && done) {
-  
       // Initalize 3d viewer
       const canvas = document.getElementById("canvas");
       let viewer;
@@ -207,7 +148,7 @@ useEffect(() => {
           viewer.width = x.matches ? window.innerWidth * 0.2 :  window.innerWidth * 0.3,
           viewer.height = x.matches ? window.innerHeight * 0.22 :window.innerHeight * 0.62;
         };
-        let wrapper = document.querySelector(`.${styles.wrapper}`)
+        const wrapper = document.querySelector(`.${styles.wrapper}`)
         var x = window.matchMedia("(max-width: 114.75rem)");
         const appendCanvas = () => {
           if (x.matches) { 
@@ -218,8 +159,7 @@ useEffect(() => {
               wrapper.style.position = 'static'
               document.querySelector(`.${styles.flex}`).style.display = 'contents';
           } else {
-            
-            let parent = document.querySelector(`.${styles.flex}`);
+            const parent = document.querySelector(`.${styles.flex}`);
               parent.insertBefore(wrapper, document.querySelector(`.${styles.display}`))
               wrapper.style.position = 'sticky'
               parent.style.display = 'flex'
@@ -307,7 +247,7 @@ useEffect(() => {
         
         {done && 
         <div className= {styles.parent}>
-            <div className={styles.title}>Showing data for <div className = {styles.name}>{data.name}</div> on <div className={styles.name} style = {{width: 'max-content'}}> {data.profile} </div> </div>
+            <div className={styles.title}>Showing data for <div className = {styles.name}>{data.account.name}</div> on <div className={styles.name} style = {{width: 'max-content'}}> {data.profile} </div> </div>
             <div className={styles.title}>STATS <hr/></div>
              <div className = {styles.stats}>
             {/* {Object.keys(data.profiles[key].data.stats).map((statKey, index) => {
@@ -338,46 +278,12 @@ useEffect(() => {
 </div> 
 <div className = {styles.title}> INVENTORY</div>
 <hr/> 
-<div className = {styles.inv}>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className = {styles.spacer}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}></div>
-   <div className={styles.item}>  </div> 
-     
-   </div>  
+<div className={styles.inv}>
+ {data.inventory.inv.map((item, index) => {
+  
+ return <div key = {index} className= {styles.item}> {item && <Image className = {styles.glint}width={100} height={100} src = {`/items/${item.id}.png`} alt =''/> }</div>
+ })}
+ </div>
 </div>           
  }
  </div>

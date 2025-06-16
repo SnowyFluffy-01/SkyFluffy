@@ -1,0 +1,213 @@
+Furfsky Reborn Full Bloom 1.8
+
+
+New Textures
+
+Mining :
+- Aquamarine Gemstones
+- Amber Necklace
+- Amethyst Gauntlet
+- Chisels
+- Citrine Gemstones
+- Claw Fossil
+- Clubbed Fossil
+- Divan Powder Coating
+- Divan's Pendant
+- Dwarven Handwarmers
+- Dwarven O's Block Bran
+- Dwarven O's Gemstone Grahams
+- Dwarven O's Metallic Minis
+- Dwarven O's Ore Oats
+- Footprint Fossil
+- Frigid Husk
+- Glacite
+- Glacite Amalgamation
+- Gleaming Crystal
+- Glossy Gemstone
+- Jade Belt
+- Mithril Equipments
+- Onyx Gemstones
+- Perfect Plate
+- Peridot Gemstones
+- Pocket Iceberg
+- Precursor Apparatus
+- Refined Umber
+- Refined Tungsten
+- Relic of Power
+- Rusty Titanium Pickaxe
+- Royal Compass
+- Sapphire Cloak
+- Secret Railroad Pass
+- Shattered Locket
+- Skeleton Key
+- Spine Fossil
+- Suspicious Scrap
+- Titanium Equipments
+- Titanium Minecart
+- Titanium Tesseract
+- Tungsten
+- Tungsten Key
+- Tungsten Plate
+- Ugly Fossil
+- Umber
+- Umber Key
+- Umber Plate
+- Webbed Fossil
+- Yusk Fossil
+
+Weapons :
+- Starred Daedalus Axe
+- Starred Glacial Scythe
+- Starred Ice Spray Wand
+- Starred Yeti Sword
+
+Accessories:
+- Artifact of Coins
+- Dwarven Metal Talisman
+- Emerald Artifact
+- Ganache Chocolate Slab
+- General's Medaillon
+- Glossy Mineral Talisman
+- Haste Artifact
+- Intimidation Relic
+- Magic 8 Ball
+- Nibble Chocolate Stick
+- Prestige Chocolate Realm
+- Relic of Coins
+- Relic of Power
+- Rich Chocolate Chunk
+- Rift Prism
+- Ring of Coins
+- Scavenger Artifact
+- Scavenger Ring
+- Smooth Chocolate Bar
+
+Other items :
+- Avaricious Chalice
+- Bottle of Jyrre
+- Blazen Sphere
+- Blood-Soaked Coins
+- Blood-Stained Coins
+- Brown Bandana
+- Crown of Avarice
+- Cruxmotion
+- Dark Cacao Truffle
+- Dwarven Treasure
+- Dyes (some)
+- Fine Flour
+- Freshly-Minted Coins
+- Frosty Crux
+- Golden Bounty
+- Golden Fragment
+- Goldor Armor
+- Giant Fishing Rod
+- Holy Ice
+- Maxor Armor
+- Necron Armor
+- Necron Ladder
+- Party Hat
+- Polished Topaz Rod
+- Refined Bottle of Jyrre
+- Refined Dark Cacao Truffle
+- Scribe Crux
+- Shadow Crux
+- Shy Crux
+- Sirius' Personal Phone Number
+- Slimy Rune
+- Soultwist Rune
+- Splatter Crux
+- Storm Armor
+- Supreme Chocolate Bar
+- Volt Crux
+- Winter Fragment
+- Wither Armor
+- Zorro's Cape
+
+Miscelaenous :
+- Models for deployable Orbs
+- Time Pocket (ui)
+- Ultimate rarity filter (ui)
+
+
+Changed Textures
+
+Mining:
+- Amber Gemstones
+- Amethyst Gemstones
+- Bandaged Mithril Pickaxe
+- Bejeweled Handle
+- Divan Alloy
+- Divan Fragment
+- Drills
+- Fractured Mithril Pickaxe
+- Golden Plate
+- Glacite Jewel
+- Helix Fossil
+- HotM Perks (ui)
+- Jade Gemstones
+- Jasper Gemstones
+- Mithril
+- Mithril Pickaxe
+- Mithril Plate
+- Refined Mithril
+- Refined Mithril Pickaxe
+- Refined Titanium
+- Refined Titanium Pickaxe
+- Ruby Gemstones
+- Sapphire Gemstones
+- Titanium
+- Titanium Pickaxe
+- Titanium Plate
+- Topaz Gemstones
+- Tribal Spear
+
+Weapons:
+- Giant Sword
+- Midas Staff and Midas Sword | Fragged and not Fragged | Gilded and not Gilded
+- Sword of Revelations
+- Thick Sword of Revelations
+- Yeti Sword
+
+ Accessories:
+- Auto Recombobulator
+
+Other Items:
+- Golden Gift
+- Green Gift
+- Mana Flux Power Orb
+- Overflux Power Orb
+- Plasma Flux Power Orb
+- Radiant Power Orb
+- Recombobulator
+- Red Gift
+- White Gift
+
+
+Fixes
+
+Items:
+- Added the missing floating heads (arachne fang/arachne fragment/ascension rope/beating heart/claw fossil/compact ooze/diamond atom/dwarven grahams/flaming fist/hallowed skull/hot kuudra key/kuudra key/luxurious spool/magma urchin/midas jewel/molten cube/optical lens/premium flesh/rekindled ember fragment/revive stone/rough jasper gemstone/yoggie)
+- Ditto Blob
+- Fixed "empty" Gemstone Gauntlet
+- Fixed Pet Mining Exp Boost 30% (uncommon)
+
+Ui:
+- Added item textures to the forge menu (for tools / gear / other)
+- Added Floor and Dungeon Type textures in the Party Finder menu
+- Added Floor textures in the Croesus menu
+- Added the new salvage filters
+- Fixed Catacombs Profile menu
+- Fixed Catacomb xp Pet Rule
+- Fixed Dragon Armors not rendering in the Altar Guide
+- Fixed Experience Bottles not rendering in /hex
+- Fixed Odger's menu Trophy Fishs
+- Fixed Pet Rules icons not showing in the main menu
+
+
+Other
+- Added Bone Reaver / Felthorn Reaper as big_sword
+- A few splash texts
+- Midas Sword and Staff Regex for the NEU Item list (and starred versions)
+- Rescalled the big_sword model
+- Rescalled the drill model
+- UI models on the progression bars (HotM - Museum - Crops Upgrades - Garden Levels - Collections - Skills - Bestiary - Skyblock Level)
