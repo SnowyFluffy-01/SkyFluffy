@@ -2,7 +2,7 @@ import Body from "./componenets/body";
 
 export default function Home() {
   return (
-    <div>
+    
     
 
     
@@ -10,5 +10,5 @@ export default function Home() {
     
     <Body />
    
-   </div>
+
   )}

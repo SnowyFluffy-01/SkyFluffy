@@ -1,48 +1,64 @@
-html, body {
-    margin: 0;
-    padding: 0;
-     min-width: 27rem;  /*oh no.. */
-    background: url('../public/sb2.png') no-repeat center center;
-    background-size: cover;
-   background-attachment: fixed;
-   
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  width: 100vw;
+  max-width: 100%;
+  background: url("../public/sb2.png") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
 
- html {
-  font-size: 16px;
-  height: 100%
- }
-
-  hr {
-    position: relative;
-    right: 40%;
-    width: 20%;
-    border-color: darkgray;
-  }
-  
- 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-      transition: background-color 5000s ease-in-out 0s !important;
-      color: white !important;
-      -webkit-box-shadow: 0 0 0px 1000px rgb(26, 26, 26) inset !important;
-      box-shadow: 0 0 0px 1000px rgb(26, 26, 26) inset !important;
-      -webkit-text-fill-color: white !important;
-      caret-color: white !important;
-      font-family: inherit !important; 
-      font-size: inherit !important;  
-      line-height: inherit !important; 
-      padding:0
-  }  
-
-  input:-internal-autofill-selected {
-    font-family: inherit !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
 }
 
+html {
+  font-size: clamp(15px, 1vw + 0.5rem, 18px);
+}
+
+
+
+hr {
+  height: 3px;
+  border: none;
+  background: linear-gradient(to right, #555, #aaa);
+  width: min(40vw, 8rem);
+  margin: 0;
+  transform: translateY(-0.6rem);
+  flex-shrink: 0;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s; 
+    font-family: inherit !important;
+    font-weight: inherit !important; 
+    font-size: inherit !important; 
+    -webkit-text-fill-color: #fff;
+}
+
+ 
+
+
+input, input:focus, input:hover {
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  font-size: inherit !important;
+}
+
+
+input {
+  caret-color: rgb(226, 32, 32);
+
+}
+:root {
+  --color: rgba(14, 13, 13, 0.7);
+}
+
+@media (min-width: 64rem) {
+
+}
 
 
 /* for the poor peple with like flip phones */
