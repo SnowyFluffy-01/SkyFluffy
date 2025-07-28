@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -30,9 +26,11 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "./src/**/*"
-, "styles/api-req.js", "lib", "styles/layout.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "./src/**/*",
+    "styles/api-req.js",
+    "src/lib",
+    "styles/layout.js",
+    "src/lib/constants/static.js"
+  ],
+  "exclude": ["node_modules"]
 }
