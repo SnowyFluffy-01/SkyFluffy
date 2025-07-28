@@ -1,0 +1,2 @@
+- A Project to clone SkyCrypt : https://sky.shiiyu.moe/
+  -NOTE: IGNORE PUBLIC FILE & PATHS (...for now, currently fighting with git to make it work)
