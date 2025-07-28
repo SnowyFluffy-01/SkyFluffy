@@ -1,4 +1,4 @@
-import react from "react";
+
 import styles from "../../../styles/skill.module.css";
 import Image from "next/image";
 function Skill({ name, level, overflow, xp, nextXp }) {
@@ -9,7 +9,7 @@ function Skill({ name, level, overflow, xp, nextXp }) {
     barWidth = 100;
   }
 
-  const namer = name.slice(0, 1).toUpperCase() + name.slice(1);
+  name = name.slice(0, 1).toUpperCase() + name.slice(1);
 
   function isMax() {
     if (barWidth > 99) {
@@ -42,9 +42,9 @@ function Skill({ name, level, overflow, xp, nextXp }) {
         className={styles.image}
         style={{ backgroundColor: isMax() ? "gold" : "green" }}
       >
-        <Image width={50} height={50} alt="" src={source} />
+        <Image className = {styles.skill} width={50} height={50} alt="" src={source} />
       </div>
-      <div className={styles.name}> {namer + " " + level} </div>
+      <div className={styles.name}> {`${name} ${level}`} </div>
 
       <div className={styles.barContainer}>
         <div

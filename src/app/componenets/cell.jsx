@@ -3,16 +3,17 @@ import SearchIcon from "@mui/icons-material/Search";
 export default function Cell(props) {
   return (
    <>
-      <div className={styles.cellFlex}>
+      <div className={props.status == "done" ? styles.inlineFlex : styles.cellFlex}>
       
-          <div>View your SB profile</div>
+        {props.status == 'idle' && <div className= {styles.text}>View your SB profile</div>}
           <div>
             <input
               id="input"
               value={props.input}
               className={styles.input}
               placeholder="Enter IGN"
-              onChange={props.handleChange}
+            onChange={props.handleChange}
+            onKeyDown={props.handleEvent}
             />
           </div>
           { <div>

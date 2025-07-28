@@ -1,14 +1,5 @@
-import Body from "./componenets/body";
+import Page from "./componenets/page";
 
 export default function Home() {
-  return (
-    
-    
-
-    
-
-    
-    <Body />
-   
-
-  )}
+  return <Page />;
+}

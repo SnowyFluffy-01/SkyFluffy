@@ -9,7 +9,8 @@ body {
   background-size: cover;
   background-attachment: fixed;
   position: relative;
-
+  scrollbar-width: thin !important;
+  scrollbar-color: #b63131 rgb(0, 0, 0) !important;
 }
 
 html {
