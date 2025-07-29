@@ -18,7 +18,7 @@ export default async function animateSprites() {
         const frames = [];
         const framesNumber = Math.floor(metaData.height / metaData.width);
         const fHeight = Math.floor(metaData.height / framesNumber);
-        console.log(metaData.width, metaData.height, framesNumber)
+      
         const data = await readFile(
           path.join(itemDir, file.split('.')[0] + ".png.mcmeta"),
           "utf-8"

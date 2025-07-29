@@ -255,8 +255,7 @@ export default async function fetchData(r) {
       ),
     ]);
 
-    console.log(exists, cache);
-    if (exists) return cache;
+
     console.log("def fetchin");
 
     let skin = Buffer.from(skinRes.data).toString("base64");
@@ -286,7 +285,7 @@ export default async function fetchData(r) {
       data.skills[skillName].xp = xp;
       data.skills[skillName].nextXp = nextXp;
       data.skills[skillName].level = level;
-      overflow ? (data.skills[skillName].overflow = overflow) : null;
+      data.skills[skillName].overflow = overflow
     }
     const cataXP = Number(
       res.data?.profiles[ind]?.members[uuid]?.dungeons?.dungeon_types?.catacombs

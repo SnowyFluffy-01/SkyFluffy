@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import path from "path";
-import { LineLoop } from "three";
+
 
 const dirPath = path.resolve(
   "public",
