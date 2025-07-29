@@ -1,6 +1,6 @@
 import loadHead from "../scripts/loadHead.js";
 import parseNbt from "./parseNbt.js";
-import vanillaItems from '../constants/vanillaItems.json' with { type: 'json'}
+import {vanillaItems} from '../constants/vanillaItems.js' 
 import getPathFromJSON from "../scripts/getPathFromJSON.js";
 import path from "path";
 import { readdir } from "fs/promises";
