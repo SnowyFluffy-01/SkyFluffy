@@ -1,6 +1,6 @@
 import { Montserrat } from "next/font/google";
 import "../../styles/globals.css";
-
+import ToolTipProvider from "./componenets/context";
 const montserrat = Montserrat({ subsets: ["latin"], weight: "500" });
 
 export const metadata = {
@@ -27,17 +27,18 @@ export const metadata = {
   },
 };
 
-
 export const viewport = {
   width: "device-width",
   "initial-scale": 1.0,
-  "userScalable": true,
+  userScalable: true,
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <ToolTipProvider>{children}</ToolTipProvider>
+      </body>
     </html>
   );
 }

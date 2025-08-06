@@ -4,11 +4,10 @@
   aspect-ratio: 1;
   width: min(6vw, 10rem);
   position: relative;
-
-  box-shadow: 0 0 0 1px rgb(29, 28, 28) inset; /* Matches tooltip bg */
   outline: none !important;
   z-index: auto;
 }
+
 
 .glint {
   display: block;
@@ -22,7 +21,7 @@
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
-  transition: all 0.3 ease;
+  z-index: 1;
 }
 
 .spacer {
@@ -69,75 +68,6 @@
 
 .glint:hover {
   transform: scale(1.1);
-}
-
-.lore {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  direction: ltr;
-  background-color: rgba(0, 0, 0, 0.877);
-  z-index: 1000;
-  text-align: left;
-  width: max-content;
-  text-wrap: nowrap;
-  border-radius: 1rem;
-  overflow-y: auto;
-  padding: 0.6rem;
-  min-height: auto;
-  user-select: none;
-  max-height: 60vh;
-  scrollbar-width: thin !important;
-  scrollbar-color: #b63131 rgb(0, 0, 0) !important;
-  color: white;
-  will-change: opacity;
-  transition: opacity 0.3s ease;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.name {
-  margin-bottom: 0.1rem;
-}
-.italic {
-  font-style: italic;
-}
-
-
-.hidden {
-  position: absolute;
-  opacity: 0;
-  visibility: hidden;
- 
-}
-
-.hovered {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  visibility: visible;
-  opacity: 1
-}
-.centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 100000;
-  transform: translate(-50%, -50%);
- max-height: 82vh;
-
-}
-
-.darken {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 9999; 
 }
 
 

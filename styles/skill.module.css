@@ -63,7 +63,8 @@
   color: white;
   font-weight: bold;
   z-index: 1;
-  margin-left: 0.6rem;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .skill {

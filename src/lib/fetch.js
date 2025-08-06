@@ -3,7 +3,7 @@ import axios from "axios";
 import calcXp from "./calculations/calculateXp.js";
 import parseInv from "./parsers/parseInv.js";
 import { redis } from "./redis.js";
-
+import parsePets from "./parsers/parsePets.js";
 
 // const sbSkills = [
 //   "Combat",
@@ -128,99 +128,12 @@ import { redis } from "./redis.js";
 
 export default async function fetchData(r) {
   try {
-    const data = {
-      account: {
-        name: null,
-        profile: null,
-        skin: null,
-        ranked: null,
-      },
-      skills: {
-        farming: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        foraging: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        combat: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        social: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        fishing: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        alchemy: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        mining: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        enchanting: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        taming: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        dungeoneering: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        carpentry: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-        runecrafting: {
-          xp: null,
-          nextXp: null,
-          level: null,
-          overflow: null,
-        },
-      },
-      inventory: {
-        inv: null,
-        armor: null,
-        equipment: null,
-        ender: null,
-      },
-    };
+    const data = {}
     const ignRes = await axios.get(`https://mowojang.matdoes.dev/${r}`);
     const uuid = ignRes.data.id;
-     const exists =(await redis.exists(uuid)) == 1;
-     const cache = exists ? await redis.get(uuid) : null;
-    if(cache) return cache
+    const exists = (await redis.exists(uuid)) == 1;
+    const cache = exists ? await redis.get(uuid) : null;
+    if (cache) return cache;
     const formatteduuid =
       uuid.slice(0, 8) +
       "-" +
@@ -232,8 +145,7 @@ export default async function fetchData(r) {
       "-" +
       uuid.slice(20);
     console.log(formatteduuid);
-  
-    
+
     const [rankRes, skinRes, res] = await Promise.all([
       axios.get(`https://api.hypixel.net/v2/player?uuid=${formatteduuid}`, {
         headers: {
@@ -256,10 +168,10 @@ export default async function fetchData(r) {
     ]);
 
 
-    console.log("def fetchin");
 
     let skin = Buffer.from(skinRes.data).toString("base64");
     skin = `data:image/png;base64,${skin}`;
+    data.account = data.account || {}
     data.account.name = ignRes.data.name;
     data.account.skin = skin;
 
@@ -269,9 +181,7 @@ export default async function fetchData(r) {
       rankRes.data.player.prefix;
     data.account.ranked = ranked;
 
-   
-
-   const ind = res.data.profiles.findIndex(profile => profile.selected)
+    const ind = res.data.profiles.findIndex((profile) => profile.selected);
     const profile = res.data.profiles[ind].cute_name;
     data.account.profile = profile;
 
@@ -280,12 +190,13 @@ export default async function fetchData(r) {
       res.data.profiles[ind].members[uuid].player_data.experience;
     for (const [key, value] of Object.entries(experience)) {
       const skillName = key.toLocaleLowerCase().split("_")[1];
-
+      data.skills = data.skills || {}
       const { xp, level, nextXp, overflow } = calcXp(value, skillName, ranked);
+      data.skills[skillName] = data.skills[skillName] || {}
       data.skills[skillName].xp = xp;
       data.skills[skillName].nextXp = nextXp;
       data.skills[skillName].level = level;
-      data.skills[skillName].overflow = overflow
+      data.skills[skillName].overflow = overflow;
     }
     const cataXP = Number(
       res.data?.profiles[ind]?.members[uuid]?.dungeons?.dungeon_types?.catacombs
@@ -296,24 +207,30 @@ export default async function fetchData(r) {
       "dungeoneering",
       ranked
     );
+    data.skills.dungeoneering = data.skills.dungeoneering || {}
     data.skills.dungeoneering.xp = xp;
     data.skills.dungeoneering.nextXp = nextXp;
     data.skills.dungeoneering.level = level;
     data.skills.dungeoneering.overflow = overflow;
+
+    
     // Inventory data
+    data.inventory = data.inventory || {}
     const inventoryPath = res.data?.profiles[ind]?.members[uuid]?.inventory;
     let inv = inventoryPath.inv_contents?.data;
     let armor = inventoryPath.inv_armor?.data;
     let ender = inventoryPath.ender_chest_contents?.data;
     let equipment = inventoryPath.equipment_contents?.data;
     let talisman = inventoryPath.bag_contents?.talisman_bag?.data;
+    let pets = res.data.profiles[ind].members[uuid].pets_data.pets;
 
-    [inv, armor, ender, equipment, talisman] = await Promise.all([
+    [inv, armor, ender, equipment, talisman, pets] = await Promise.all([
       parseInv(inv, "inventory"),
       parseInv(armor, "armor"),
       parseInv(ender, "ender"),
       parseInv(equipment, "equipment"),
       parseInv(talisman, "talisman"),
+      parsePets(pets),
     ]);
 
     data.inventory.inv = inv;
@@ -321,10 +238,10 @@ export default async function fetchData(r) {
     data.inventory.ender = ender;
     data.inventory.equipment = equipment;
     data.inventory.armor = armor;
-
+    data.inventory.pets = pets;
     // ---------------- END
 
-    redis.set(uuid, data, {ex: 10})
+    redis.set(uuid, data, { ex: 10 });
     return data;
   } catch (e) {
     console.error(e);

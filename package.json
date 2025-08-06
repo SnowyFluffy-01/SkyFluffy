@@ -29,6 +29,7 @@
     "graceful-fs": "^4.2.11",
     "headview3d": "^3.0.2",
     "jsdom": "^26.1.0",
+    "module-alias": "^2.2.3",
     "next": "^15.3.5",
     "nodemon": "^3.1.10",
     "p-limit": "^6.2.0",

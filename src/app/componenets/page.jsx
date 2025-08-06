@@ -1,24 +1,38 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import styles from "../../../styles/page.module.css";
 import Skill from "./skill";
 import fetch from "../../lib/fetch.js";
 import { SkinViewer } from "skinview3d";
 import Cell from "./cell";
 import Inventory from "./inventory";
-
+import Pets from "./pets";
+import { useTooltip } from "./context";
 export default function Page() {
   const [status, setStatus] = useState("idle");
   const [input, setInput] = useState("");
   const [match, setMatch] = useState(false);
   const [data, setData] = useState(null);
   const [tab, setTab] = useState("inventory");
-
   const canvasRef = useRef(null);
   const appendRef = useRef(null);
   const originalRef = useRef(null);
   const viewerRef = useRef(null);
 
+  const { eventRef, setShowCentered, showCentered, deactivatedRef} = useTooltip()
+  useEffect(() => {
+    const handleClick = (e) => {
+      const lore = document.getElementById("lore")
+      if (!eventRef.current || e.currentTarget == lore) return;
+     
+        setShowCentered(false)
+       deactivatedRef.current = false;
+    };
+
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, []);
+  
   useEffect(() => {
     if (!canvasRef.current) return;
     if (!viewerRef.current) {
@@ -85,7 +99,17 @@ export default function Page() {
   };
 
   return (
-    <div id = 'root'>
+    <div id="root">
+      {showCentered && eventRef.current && (
+        <>
+      <div className={styles.darken}></div>
+          <div
+            id = 'lore'
+        className={`${styles.centered} ${styles.hovered} ${styles.lore}`}
+        dangerouslySetInnerHTML={{ __html: eventRef.current.innerHTML }}
+          ></div>
+          </>
+       )}
       <div className={styles.header}>
         {status == "done" && (
           <Cell
@@ -163,7 +187,7 @@ export default function Page() {
                     setTab("enderchest");
                   }}
                 >
-                ENDER CHEST
+                  ENDER CHEST
                 </div>
                 <div
                   className={styles.title}
@@ -181,9 +205,19 @@ export default function Page() {
                 >
                   TALISMAN BAG
                 </div>
+                <div
+                  className={styles.title}
+                  onClick={() => {
+                    setTab("pets");
+                  }}
+                >
+                  PETS
+                </div>
               </div>
-
-              <Inventory tab={tab} inventory={data.inventory} />
+              {tab == "pets" && <Pets pets={data.inventory.pets} />}
+              {tab != "pets" && (
+                <Inventory tab={tab} inventory={data.inventory} />
+              )}
             </div>
           </div>
         </div>

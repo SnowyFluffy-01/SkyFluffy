@@ -1,0 +1,33 @@
+.glint {
+  display: block;
+  user-select: none;
+  position: relative;
+  top: 10%;
+  image-rendering: pixelated;
+  width: 80%;
+  height: 80%;
+  margin-inline: auto;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  transition: all 0.3 ease;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0.5rem;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+}
+.pet  {
+  position: relative;
+  border: 1px solid #0c0c0c;
+  border-radius: 0.25rem;
+  aspect-ratio: 1;
+  width: min(6vw, 10rem);
+}

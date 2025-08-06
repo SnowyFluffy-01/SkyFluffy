@@ -1,46 +1,20 @@
 
 import styles from "../../../styles/skill.module.css";
 import Image from "next/image";
+import formatNumber from "../../lib/utils/formatNumber.js";
 function Skill({ name, level, overflow, xp, nextXp }) {
-  let barWidth;
-  if (nextXp) {
-    barWidth = Math.floor((xp / nextXp) * 100);
-  } else {
-    barWidth = 100;
-  }
-
+  const barWidth = nextXp ? Math.floor((xp / nextXp) * 100) : 100
   name = name.slice(0, 1).toUpperCase() + name.slice(1);
-
-  function isMax() {
-    if (barWidth > 99) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  xp = new Intl.NumberFormat("en-US", {
-    notation: "compact",
-    compactDisplay: "short",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(xp);
-
-  overflow
-    ? (overflow = new Intl.NumberFormat("en-US", {
-        notation: "compact",
-        compactDisplay: "short",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(overflow))
-    : null;
+  xp = formatNumber(xp)
+  overflow == overflow && formatNumber(overflow);
+  const isMax = barWidth > 99
   const source = `/skills/${name}.png`;
 
   return (
     <div className={styles.container}>
       <div
         className={styles.image}
-        style={{ backgroundColor: isMax() ? "gold" : "green" }}
+        style={{ backgroundColor: isMax ? "gold" : "green" }}
       >
         <Image className = {styles.skill} width={50} height={50} alt="" src={source} />
       </div>
@@ -51,12 +25,11 @@ function Skill({ name, level, overflow, xp, nextXp }) {
           className={styles.bar}
           style={{
             width: `${barWidth}%`,
-            backgroundColor: isMax() ? "gold" : "green",
+            backgroundColor: isMax ? "gold" : "green",
           }}
         ></div>
-        <div style={{ marginLeft: "16%" }} className={styles.xp}>
-          {" "}
-          {overflow ? overflow + " OVERFLOW" : xp}{" "}
+        <div className={styles.xp}>
+          {overflow ? overflow + " OVERFLOW" : xp}
         </div>
       </div>
     </div>

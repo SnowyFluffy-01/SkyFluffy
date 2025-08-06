@@ -18,6 +18,53 @@
  
 }
 
+.hidden {
+  position: absolute;
+  opacity: 0;
+ 
+}
+
+.lore {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  direction: ltr;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.877);
+  z-index: 900000;
+  text-align: left;
+  position: absolute;
+  width: max-content;
+  text-wrap: nowrap;
+  border-radius: 1rem;
+  overflow-y: auto;
+  padding: 0.6rem;
+  min-height: auto;
+  user-select: none;
+  max-height: 60vh;
+  scrollbar-width: thin !important;
+  scrollbar-color: #b63131 rgb(0, 0, 0) !important;
+  color: white;
+ opacity: 0;
+   will-change: opacity;
+ transition: opacity 0.5 ease;
+}
+.hovered {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: visible;
+  opacity: 1
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+ max-height: 82vh;
+pointer-events: all;
+}
 
 
 
@@ -28,12 +75,10 @@
   position: relative;
   border-radius: 3px;
   padding: 0;
-  width: 100vw;
-  max-width: 100%;
+width: mmin-content;
   /* margin-left: auto; */
   backdrop-filter: blur(15px);
- overflow-x: auto;
- overflow-y: hidden;
+ overflow: hidden
 }
 
 
@@ -61,6 +106,16 @@
  width: auto;
 height: max-content;
  flex-direction: column;
+}
+
+.darken {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+backdrop-filter: brightness(0.5) blur(2px);
+  z-index: 999; 
 }
 
 
